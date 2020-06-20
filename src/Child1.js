@@ -10,7 +10,7 @@ import "tachyons";
 function Child1() {
   let transactions = useContext(trnsaction);
 
-  let { addTransaction } = useContext(trnsaction);
+  //let { addTransaction } = useContext(trnsaction);
   let [newDesc, setDesc] = useState("");
   let [newAmount, setAmount] = useState(0);
   const handleAddition = (event) => {
@@ -20,7 +20,7 @@ function Child1() {
       amount: Number(newAmount),
       desc: newDesc,
     });
-setAmount(null)
+setAmount(0)
 setDesc("")
 
   };
