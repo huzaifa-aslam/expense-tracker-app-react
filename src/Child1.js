@@ -87,14 +87,14 @@ setDesc("")
         <hr />
       </div>
       <form onSubmit={handleAddition}>
-        <label>Text</label>
+        <label>Description</label>
         <br />
         <input
     value={newDesc}
           className="w-100 p-2"
           type="text"
           onChange={(ev) => setDesc(ev.target.value)}
-          placeholder="Enter Text..."
+          placeholder="Enter Description..."
         />
         <br />
         <label>Amount</label>
