@@ -1,9 +1,9 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 //import {transaction} from './transContext'
 import { trnsaction } from "./transContext";
 
-import transReducer from "./transReducer";
+//import transReducer from "./transReducer";
 
 import "tachyons";
 
