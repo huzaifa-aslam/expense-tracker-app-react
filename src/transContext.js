@@ -6,13 +6,11 @@ const initialTransaction = [
   { desc: "withdraw", amount: 700 },
 ];
 
-
-
 export const trnsaction = createContext(initialTransaction);
 
 export const TrasactionProvider = ({ children }) => {
   let [state, dispatch] = useReducer(transReducer, initialTransaction);
-   function addTransaction(transObj) {
+  function addTransaction(transObj) {
     dispatch({
       type: "ADD_TRANSACTION",
       payload: {
@@ -25,7 +23,7 @@ export const TrasactionProvider = ({ children }) => {
     <trnsaction.Provider
       value={{
         trnsaction: state,
-        addTransaction
+        addTransaction,
       }}
     >
       {children}

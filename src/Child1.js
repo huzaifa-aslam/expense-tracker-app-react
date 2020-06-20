@@ -1,27 +1,28 @@
-import React,{useContext,useReducer,useState} from "react";
+import React, { useContext, useReducer, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 //import {transaction} from './transContext'
-import {trnsaction} from './transContext'
+import { trnsaction } from "./transContext";
 
-import transReducer from './transReducer'
+import transReducer from "./transReducer";
 
 import "tachyons";
 
 function Child1() {
-
-  let transaction=useContext(trnsaction)
-console.log(transaction)
-  //let addTransaction=useContext(trnsaction)
-  let [newDesc,setDesc]=useState("");
-  let [newAmount,setAmount]=useState(0)
-  const handleAddition=(event)=>{
+let {transactions} = useContext(trnsaction);
+  console.log(transactions);
+let {addTransaction}=useContext(trnsaction)
+  let [newDesc, setDesc] = useState("");
+  let [newAmount, setAmount] = useState(0);
+  const handleAddition = (event) => {
     event.preventDefault();
-    // addTransaction({
-    //   amount:newAmount,
-    //   desc:newDesc
-    // })
 
-  }
+    addTransaction({
+      amount:newAmount,
+      desc:newDesc
+
+    })
+
+  };
   return (
     <Container className="measure bg-light-gray p-5">
       <div className="tc">
@@ -46,18 +47,14 @@ console.log(transaction)
         <hr />
       </div>
       <div className="history">
-
-        {
-
-transaction?.map((transObj, ind) => {
+        {transactions?.transactions.map((transObj, ind) => {
           return (
-            <div className="flex justify-between bg-white m-2 p-2 "key={ind}>
+            <div className="flex justify-between bg-white m-2 p-2 " key={ind}>
               <span>{transObj.desc}</span>
               <span>{transObj.amount}</span>
             </div>
           );
         })}
-
       </div>
 
       <div>
@@ -67,13 +64,25 @@ transaction?.map((transObj, ind) => {
       <form onSubmit={handleAddition}>
         <label>Text</label>
         <br />
-        <input className="w-100 p-2" type="text" onChange={(ev)=>setDesc(ev.target.value)} placeholder="Enter Text..." />
+        <input
+          className="w-100 p-2"
+          type="text"
+          onChange={(ev) => setDesc(ev.target.value)}
+          placeholder="Enter Text..."
+        />
         <br />
         <label>Amount</label>
         <br />
-        <input className="w-100 p-2" type="number" onChange={(ev)=>setAmount(ev.target.value)} placeholder="Enter amount..." />
+        <input
+          className="w-100 p-2"
+          type="number"
+          onChange={(ev) => setAmount(ev.target.value)}
+          placeholder="Enter amount..."
+        />
         <br />
-        <Button type="submit"   className="w-100 mt-3">Add Transaction</Button>
+        <Button type="submit" className="w-100 mt-3">
+          Add Transaction
+        </Button>
       </form>
     </Container>
   );
