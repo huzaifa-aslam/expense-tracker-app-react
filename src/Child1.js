@@ -8,38 +8,63 @@ import transReducer from "./transReducer";
 import "tachyons";
 
 function Child1() {
-let {transactions} = useContext(trnsaction);
-  console.log(transactions);
-let {addTransaction}=useContext(trnsaction)
+  let transactions = useContext(trnsaction);
+
+  let { addTransaction } = useContext(trnsaction);
   let [newDesc, setDesc] = useState("");
   let [newAmount, setAmount] = useState(0);
   const handleAddition = (event) => {
     event.preventDefault();
 
-    addTransaction({
-      amount:newAmount,
-      desc:newDesc
-
-    })
+    transactions.addTransaction({
+      amount: Number(newAmount),
+      desc: newDesc,
+    });
+setAmount(null)
+setDesc("")
 
   };
+  // getIncome function
+  const getIncome = () => {
+    let income = 0;
+
+    for (var i = 0; i < transactions?.trnsaction.length; i++) {
+      // console.log(transactions)
+      if (transactions?.trnsaction[i].amount > 0)
+        income += transactions?.trnsaction[i].amount;
+    }
+    return income;
+  };
+  // getExpense function
+  const getExpense = () => {
+    let expense = 0;
+    // console.log(expense)
+    for (var i = 0; i < transactions?.trnsaction.length; i++) {
+      if (transactions?.trnsaction[i].amount < 0)
+        expense += transactions?.trnsaction[i].amount;
+    }
+    return expense;
+  };
+
   return (
-    <Container className="measure bg-light-gray p-5">
+    <Container className="measure bg-light-gray pl-5 pr-5 pt-2 pb-3">
       <div className="tc">
-        <h3>Expense Tracker</h3>
+        <h5 className="bg-white">Expense Tracker
+            By<br/> Huzaifa Aslam
+        </h5>
       </div>
       <div>
         <h5>YOUR BALANCE</h5>
-        <h1>$260.00</h1>
+        <h5>{getIncome() + getExpense()}</h5>
       </div>
       <div className="flex justify-content-around bg-white">
         <div>
           <h5>INCOME</h5>
-          <h2>$260.00</h2>
+          <h2>{getIncome()}</h2>
         </div>
         <div>
           <h5>EXPENSE</h5>
-          <h2>$260.00</h2>
+          <h2>{getExpense()}</h2>
         </div>
       </div>
       <div className="">
@@ -47,9 +72,9 @@ let {addTransaction}=useContext(trnsaction)
         <hr />
       </div>
       <div className="history">
-        {transactions?.transactions.map((transObj, ind) => {
+        {transactions?.trnsaction.map((transObj, ind) => {
           return (
-            <div className="flex justify-between bg-white m-2 p-2 " key={ind}>
+            <div className="flex justify-between bg-white m-2 pl-3 pr-3 pt-1 pb-1 " key={ind}>
               <span>{transObj.desc}</span>
               <span>{transObj.amount}</span>
             </div>
@@ -65,6 +90,7 @@ let {addTransaction}=useContext(trnsaction)
         <label>Text</label>
         <br />
         <input
+    value={newDesc}
           className="w-100 p-2"
           type="text"
           onChange={(ev) => setDesc(ev.target.value)}
@@ -74,6 +100,7 @@ let {addTransaction}=useContext(trnsaction)
         <label>Amount</label>
         <br />
         <input
+          value={newAmount}
           className="w-100 p-2"
           type="number"
           onChange={(ev) => setAmount(ev.target.value)}
