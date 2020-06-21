@@ -1,9 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Button, Container } from "react-bootstrap";
-//import {transaction} from './transContext'
 import { trnsaction } from "./transContext";
-
-//import transReducer from "./transReducer";
 
 import "tachyons";
 
@@ -17,7 +14,7 @@ function Child1() {
     event.preventDefault();
 
     if (Number(newAmount) <= 0 || newDesc === "") {
-      alert(`Please Add some amount And/Or Description !!`)
+      alert(`Please Add some amount And/Or Description !!`);
 
       return false;
     }
@@ -33,7 +30,6 @@ function Child1() {
     let income = 0;
 
     for (var i = 0; i < transactions?.trnsaction.length; i++) {
-      // console.log(transactions)
       if (transactions?.trnsaction[i].amount > 0)
         income += transactions?.trnsaction[i].amount;
     }
@@ -42,7 +38,7 @@ function Child1() {
   // getExpense function
   const getExpense = () => {
     let expense = 0;
-    // console.log(expense)
+
     for (var i = 0; i < transactions?.trnsaction.length; i++) {
       if (transactions?.trnsaction[i].amount < 0)
         expense += transactions?.trnsaction[i].amount;
@@ -53,7 +49,6 @@ function Child1() {
   return (
     <Container className="measure bg-light-gray pl-5 pr-5 pt-2 pb-3">
       <div className="tc">
-
         <h5 className="bg-white">
           Expense Tracker By
           <br /> Huzaifa Aslam
@@ -85,7 +80,10 @@ function Child1() {
               key={ind}
             >
               <span>{transObj.desc}</span>
-              <span>{transObj.amount}<span></span></span>
+              <span>
+                {transObj.amount}
+                <span></span>
+              </span>
             </div>
           );
         })}
@@ -96,10 +94,14 @@ function Child1() {
         <hr />
       </div>
       <form onSubmit={handleAddition}>
-      <label>Description<br/>[e.x. Cash,Expense]</label>
+        <label>
+          Description
+          <br />
+          [e.x. Cash,Expense]
+        </label>
         <br />
         <input
-        required
+          required
           value={newDesc}
           className="w-100 p-2"
           type="text"
@@ -110,7 +112,7 @@ function Child1() {
         <label>Amount</label>
         <br />
         <input
-        required
+          required
           value={newAmount}
           className="w-100 p-2"
           type="number"
