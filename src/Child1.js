@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Alert } from "react-bootstrap";
 //import {transaction} from './transContext'
 import { trnsaction } from "./transContext";
 
@@ -16,13 +16,17 @@ function Child1() {
   const handleAddition = (event) => {
     event.preventDefault();
 
+    if (Number(newAmount) <= 0 || newDesc === "") {
+      alert(`Please Add some amount And/Or Description !!`)
+
+      return false;
+    }
     transactions.addTransaction({
       amount: Number(newAmount),
       desc: newDesc,
     });
-setAmount(0)
-setDesc("")
-
+    setAmount(0);
+    setDesc("");
   };
   // getIncome function
   const getIncome = () => {
@@ -49,8 +53,10 @@ setDesc("")
   return (
     <Container className="measure bg-light-gray pl-5 pr-5 pt-2 pb-3">
       <div className="tc">
-        <h5 className="bg-white">Expense Tracker
-            By<br/> Huzaifa Aslam
+
+        <h5 className="bg-white">
+          Expense Tracker By
+          <br /> Huzaifa Aslam
         </h5>
       </div>
       <div>
@@ -74,9 +80,12 @@ setDesc("")
       <div className="history">
         {transactions?.trnsaction.map((transObj, ind) => {
           return (
-            <div className="flex justify-between bg-white m-2 pl-3 pr-3 pt-1 pb-1 " key={ind}>
+            <div
+              className="flex justify-between bg-white m-2 pl-3 pr-3 pt-1 pb-1 "
+              key={ind}
+            >
               <span>{transObj.desc}</span>
-              <span>{transObj.amount}</span>
+              <span>{transObj.amount}<span></span></span>
             </div>
           );
         })}
@@ -87,10 +96,11 @@ setDesc("")
         <hr />
       </div>
       <form onSubmit={handleAddition}>
-        <label>Description</label>
+      <label>Description<br/>[e.x. Cash,Expense]</label>
         <br />
         <input
-    value={newDesc}
+        required
+          value={newDesc}
           className="w-100 p-2"
           type="text"
           onChange={(ev) => setDesc(ev.target.value)}
@@ -100,6 +110,7 @@ setDesc("")
         <label>Amount</label>
         <br />
         <input
+        required
           value={newAmount}
           className="w-100 p-2"
           type="number"
