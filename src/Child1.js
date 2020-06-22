@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { trnsaction } from "./transContext";
-
+//import transReducer from './transReducer'
+import "./Child1.css";
 import "tachyons";
 
 function Child1() {
@@ -13,7 +14,7 @@ function Child1() {
   const handleAddition = (event) => {
     event.preventDefault();
 
-    if (Number(newAmount) <= 0 || newDesc === "") {
+    if (Number(newAmount) === 0 || newDesc === "") {
       alert(`Please Add some amount And/Or Description !!`);
 
       return false;
@@ -25,6 +26,7 @@ function Child1() {
     setAmount(0);
     setDesc("");
   };
+
   // getIncome function
   const getIncome = () => {
     let income = 0;
@@ -58,12 +60,12 @@ function Child1() {
         <h5>YOUR BALANCE</h5>
         <h5>{getIncome() + getExpense()}</h5>
       </div>
-      <div className="flex justify-content-around bg-white">
-        <div>
+      <div className="flex justify-between text-white text-center ">
+        <div className="bg-income round-div">
           <h5>INCOME</h5>
           <h2>{getIncome()}</h2>
         </div>
-        <div>
+        <div className="bg-expensive round-div">
           <h5>EXPENSE</h5>
           <h2>{getExpense()}</h2>
         </div>
@@ -74,18 +76,29 @@ function Child1() {
       </div>
       <div className="history">
         {transactions?.trnsaction.map((transObj, ind) => {
-          return (
-            <div
-              className="flex justify-between bg-white m-2 pl-3 pr-3 pt-1 pb-1 "
-              key={ind}
-            >
-              <span>{transObj.desc}</span>
-              <span>
-                {transObj.amount}
-                <span></span>
-              </span>
-            </div>
-          );
+          if (transObj.amount < 0) {
+            return (
+              <div
+                className="flex justify-between pos-relative   m-2 pl-3 pr-3 pt-1 pb-1 bg-white  "
+                key={ind}
+              >
+                <span>{transObj.desc}</span>
+                <span>{transObj.amount}</span>
+                <span className="indication bg-expensive"></span>
+              </div>
+            );
+          } else {
+            return (
+              <div
+                className="flex justify-between pos-relative m-2 pl-3 pr-3 pt-1 pb-1 bg-white"
+                key={ind}
+              >
+                <span>{transObj.desc}</span>
+                <span>{transObj.amount}</span>
+                <span className="indication bg-income"></span>
+              </div>
+            );
+          }
         })}
       </div>
 

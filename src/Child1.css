@@ -1,0 +1,25 @@
+.bg-income {
+    background-color: #04a729!important;
+}
+
+.bg-expensive {
+    background-color: #f11515c7!important;
+}
+
+.round-div {
+    width: 50%;
+    border-radius: 30px;
+}
+
+.pos-relative {
+    position: relative;
+}
+
+.indication {
+    display: inline-block;
+    width: 4px;
+    position: absolute;
+    height: 32px;
+    right: 0;
+    top: 0px;
+}
