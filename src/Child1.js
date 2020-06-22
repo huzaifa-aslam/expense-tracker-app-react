@@ -56,9 +56,9 @@ function Child1() {
           <br /> Huzaifa Aslam
         </h5>
       </div>
-      <div>
-        <h5>YOUR BALANCE</h5>
-        <h5>{getIncome() + getExpense()}</h5>
+      <div className="text-center text-white bg-income border-radius">
+        <h5>YOUR CURRENT BALANCE</h5>
+        <h2>{getIncome() + getExpense()}</h2>
       </div>
       <div className="flex justify-between text-white text-center ">
         <div className="bg-income round-div">
@@ -103,7 +103,7 @@ function Child1() {
       </div>
 
       <div>
-        <h5>Add new Trasaction</h5>
+        <h5>Add new Transaction</h5>
         <hr />
       </div>
       <form onSubmit={handleAddition}>
