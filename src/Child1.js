@@ -52,7 +52,7 @@ function Child1() {
     <Container className="measure bg-light-gray pl-5 pr-5 pt-2 pb-3">
       <div className="tc">
         <h5 className="bg-white">
-          Expense Tracker By
+          Developed By
           <br /> Huzaifa Aslam
         </h5>
       </div>
